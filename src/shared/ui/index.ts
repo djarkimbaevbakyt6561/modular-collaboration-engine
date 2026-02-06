@@ -16,4 +16,6 @@ export {
   DropdownMenuSubContent,
 } from "./DropdownMenu";
 
-export {MenuButton} from "./MenuButton";
+export {MenuButton, LinkButton} from "./Button";
+
+export {Tooltip} from "./Tooltip";

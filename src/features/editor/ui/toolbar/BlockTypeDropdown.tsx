@@ -1,3 +1,4 @@
+import {MenuButton} from "@/src/shared/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +15,8 @@ export const BlockTypeDropdown = ({
 }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="px-3 py-1 border cursor-pointer rounded-md hover:bg-accent transition-colors duration-75 ">
-        Open
+      <DropdownMenuTrigger asChild>
+        <MenuButton title="Text type">Text type</MenuButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Turn into</DropdownMenuLabel>

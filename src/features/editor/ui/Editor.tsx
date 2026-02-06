@@ -4,6 +4,7 @@ import StarterKit from "@tiptap/starter-kit";
 import {ToolBar} from "./toolbar/ToolBar";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
+import {Selection} from "@tiptap/extensions";
 
 const Editor = () => {
   const editor = useEditor({
@@ -12,8 +13,12 @@ const Editor = () => {
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
+      Selection.configure({
+        className: "selection",
+      }),
       Link.configure({
         openOnClick: false,
+        enableClickSelection: true,
         autolink: true,
         defaultProtocol: "https",
         protocols: ["http", "https"],

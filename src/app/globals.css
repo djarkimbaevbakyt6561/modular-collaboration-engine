@@ -16,6 +16,7 @@
   --border-luxe: oklch(35% 0.01 85); /* Thin UI lines */
   --primary-gold: oklch(78% 0.12 85); /* Interactive elements */
   --secondary-gold: oklch(73.515% 0.13527 82.424); /* Interactive elements */
+  --selection-gold: oklch(44.967% 0.03486 85.427); /* Interactive elements */
 
   --radius: 0.625rem;
   --muted: oklch(0.967 0.001 286.375);
@@ -24,6 +25,9 @@
   --accent-foreground: oklch(0.21 0.006 285.885);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.92 0.004 286.32);
+}
+::selection {
+  background-color: var(--selection-gold);
 }
 
 /* Basic editor styles */
@@ -111,6 +115,17 @@
     }
   }
 
+  a {
+    color: var(--primary-gold);
+    cursor: pointer;
+    text-decoration: underline;
+    :hover {
+      color: var(--secondary-gold);
+    }
+  }
+  .selection {
+    background: var(--selection-gold);
+  }
   blockquote {
     border-left: 3px solid var(--secondary);
     margin: 1.5rem 0;
