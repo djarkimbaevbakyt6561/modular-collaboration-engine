@@ -19,3 +19,6 @@ export {
 export {MenuButton, LinkButton} from "./Button";
 
 export {Tooltip} from "./Tooltip";
+export {DotLoader} from "./loader/DotLoader";
+
+export {Input} from "./Input";

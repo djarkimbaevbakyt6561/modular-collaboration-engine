@@ -6,8 +6,9 @@ import {MenuButton} from "@/src/shared/ui/Button"; // Import the new component
 import {BlockTypeDropdown} from "./BlockTypeDropdown";
 import {ToolBarItemType} from "../../model/editor.types";
 import {getToolbarGroups} from "../../model/editor.commands";
-import {Eraser, SeparatorHorizontal} from "lucide-react";
+import {Eraser, ImagePlus, SeparatorHorizontal} from "lucide-react";
 import {LinkDropdown} from "./LinkDropdown";
+import {AIDropdown} from "./AIDropdown";
 
 export function ToolBar() {
   const {editor, isReady} = useTiptap();
@@ -33,8 +34,11 @@ export function ToolBar() {
     ));
 
   return (
-    <div className="control-group">
+    <div className="absolute">
       <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-1 border-r pr-2">
+          <AIDropdown editor={editor} />
+        </div>
         {/* History Group */}
         <div className="flex gap-1 border-r pr-2">
           {renderButtons(groups.history)}
@@ -64,7 +68,23 @@ export function ToolBar() {
         </div>
 
         {/* Alignment Group */}
-        <div className="flex gap-1">{renderButtons(groups.alignment)}</div>
+        <div className="flex gap-1 border-r pr-2">
+          {renderButtons(groups.alignment)}
+        </div>
+        <MenuButton
+          title="Add Image"
+          className="flex gap-2"
+          onClick={() =>
+            editor
+              .chain()
+              .focus()
+              .insertContent({type: "imageDrop"})
+              .newlineInCode()
+              .run()
+          }
+        >
+          <ImagePlus size={18} /> Add
+        </MenuButton>
       </div>
     </div>
   );

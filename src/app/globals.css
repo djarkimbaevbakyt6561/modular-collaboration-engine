@@ -115,6 +115,9 @@
     }
   }
 
+  img {
+    border-radius: 8px;
+  }
   a {
     color: var(--primary-gold);
     cursor: pointer;

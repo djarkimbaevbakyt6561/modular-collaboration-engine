@@ -1,0 +1,25 @@
+.loader {
+  color: var(--primary-gold);
+  width: 4px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow:
+    16px 0 0 5px,
+    32px 0 0 2px,
+    48px 0 0 0;
+  animation: l21 0.5s infinite alternate linear;
+}
+@keyframes l21 {
+  50% {
+    box-shadow:
+      16px 0 0 2px,
+      32px 0 0 5px,
+      48px 0 0 2px;
+  }
+  100% {
+    box-shadow:
+      16px 0 0 0px,
+      32px 0 0 2px,
+      48px 0 0 0px;
+  }
+}

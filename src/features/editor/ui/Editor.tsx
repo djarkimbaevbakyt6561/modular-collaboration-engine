@@ -1,15 +1,19 @@
 "use client";
 import {useEditor, Tiptap} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import {ToolBar} from "./toolbar/ToolBar";
+import {Selection} from "@tiptap/extensions";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
-import {Selection} from "@tiptap/extensions";
+import Image from "@tiptap/extension-image";
+import {ToolBar} from "./toolbar/ToolBar";
+import {ImageDrop} from "./image-drop/ImageDrop";
 
 const Editor = () => {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      ImageDrop,
+      Image,
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -103,6 +107,7 @@ const Editor = () => {
     … or two list items.
   </li>
 </ul>
+<image-drop></image-drop>
 <p>
   Isn't that great? And all of that is editable. But wait, there's more. Let's try a code block:
 </p>
@@ -124,7 +129,7 @@ const Editor = () => {
   return (
     <Tiptap instance={editor}>
       <ToolBar />
-      <Tiptap.Content />
+      <Tiptap.Content className="my-16" />
     </Tiptap>
   );
 };

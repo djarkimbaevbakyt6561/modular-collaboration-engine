@@ -1,4 +1,5 @@
 import {ComponentPropsWithoutRef} from "react";
+import {tv} from "tailwind-variants";
 import {cn} from "../lib/utils";
 import {
   Tooltip,
@@ -8,25 +9,41 @@ import {
 } from "./Tooltip"; // Adjust path to your UI components
 
 interface MenuButtonProps extends ComponentPropsWithoutRef<"button"> {
-  onClick?: () => void;
-  disabled?: boolean;
   isActive?: boolean;
-  children: React.ReactNode;
   title: string; // New required prop for accessibility
-  className?: string;
   withoutTooltip?: boolean;
+  variant?: "primary" | "secondary";
 }
+
+const button = tv({
+  base: "inline-flex items-center justify-center px-2 py-2 h-min text-sm rounded-md cursor-pointer transition-colors duration-75 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none outline-none ",
+  variants: {
+    color: {
+      primary:
+        "border border-border hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring",
+      secondary: "bg-secondary-gold text-primary hover:bg-primary-gold",
+    },
+    isActive: {
+      true: "text-secondary-gold! border-secondary-gold/50 bg-secondary-gold/10",
+    },
+  },
+  defaultVariants: {
+    color: "primary",
+  },
+});
 
 export function MenuButton({
   onClick,
   disabled = false,
   isActive = false,
+  variant,
   children,
   title,
   className,
   withoutTooltip = false,
   ...props
 }: MenuButtonProps) {
+  const buttonClasses = cn(button({isActive, color: variant}), className);
   if (withoutTooltip) {
     return (
       <button
@@ -35,12 +52,7 @@ export function MenuButton({
         disabled={disabled}
         aria-label={title}
         aria-pressed={isActive} // Crucial for screen reader accessibility
-        className={cn(
-          "inline-flex items-center justify-center px-2 py-1.5 text-sm border border-border rounded-md hover:bg-accent cursor-pointer transition-colors duration-75 disabled:opacity-50 disabled:cursor-not-allowed outline-none focus-visible:ring-2 focus-visible:ring-ring",
-          isActive &&
-            "text-secondary-gold! border-secondary-gold/50 bg-secondary-gold/10",
-          className,
-        )}
+        className={buttonClasses}
         {...props}
       >
         {children}
@@ -57,12 +69,7 @@ export function MenuButton({
             disabled={disabled}
             aria-label={title}
             aria-pressed={isActive} // Crucial for screen reader accessibility
-            className={cn(
-              "inline-flex items-center justify-center px-2 py-1.5 text-sm border border-border rounded-md hover:bg-accent cursor-pointer transition-colors duration-75 disabled:opacity-50 disabled:cursor-not-allowed outline-none focus-visible:ring-2 focus-visible:ring-ring",
-              isActive &&
-                "text-secondary-gold! border-secondary-gold/50 bg-secondary-gold/10",
-              className,
-            )}
+            className={buttonClasses}
             {...props}
           >
             {children}
@@ -78,22 +85,21 @@ export function MenuButton({
 
 interface LinkButton extends ComponentPropsWithoutRef<"a"> {
   title: string; // New required prop for accessibility
+  variant?: "primary" | "secondary";
 }
 
 export const LinkButton = ({
   title,
   children,
   className,
+  variant,
   ...props
 }: LinkButton) => {
   return (
     <a
       type="button" // Always specify type for buttons in forms
       aria-label={title}
-      className={cn(
-        "inline-flex items-center justify-center px-2 py-1.5 text-sm border border-border rounded-md hover:bg-accent cursor-pointer transition-colors duration-75 disabled:opacity-50 disabled:cursor-not-allowed outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        className,
-      )}
+      className={cn(button({color: variant}), className)}
       {...props}
     >
       {children}
